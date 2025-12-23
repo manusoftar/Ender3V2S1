@@ -104,10 +104,17 @@
 #endif
 
 //
-// Filament Runout Sensor
+// Filament Runout Sensor - BTT SFS 2.0 Dual Sensor
 //
 #ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                    PA4   // "Pulled-high"
+  #define FIL_RUNOUT_PIN                    PA7   // BTT SFS 2.0 presence sensor (connected to Z- connector)
+#endif
+
+//
+// Filament Motion Sensor (Encoder) - BTT SFS 2.0
+//
+#ifndef FIL_MOTION1_PIN
+  #define FIL_MOTION1_PIN                   PA4   // BTT SFS 2.0 encoder signal (connected to filament sensor connector)
 #endif
 
 //

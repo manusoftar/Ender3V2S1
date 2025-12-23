@@ -2080,7 +2080,7 @@
   // Commands to execute on filament runout.
   // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
   // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
-  #define FILAMENT_RUNOUT_SCRIPT "M600"
+  #define FILAMENT_RUNOUT_SCRIPT "M600\nM118 A1 //action:notification Sensor detecta falta de filamento"
 
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
@@ -2091,20 +2091,20 @@
     // Enable this option to use an encoder disc that toggles the runout pin
     // as the filament moves. (Be sure to set FILAMENT_RUNOUT_DISTANCE_MM
     // large enough to avoid false positives.)
-    //#define FILAMENT_MOTION_SENSOR
+    #define FILAMENT_MOTION_SENSOR            // BTT SFS 2.0: Enable encoder-based motion detection
 
     #if ENABLED(FILAMENT_MOTION_SENSOR)
-      //#define FILAMENT_SWITCH_AND_MOTION      // Define separate pins below to sense motion
+      #define FILAMENT_SWITCH_AND_MOTION      // BTT SFS 2.0: Use both presence and motion sensors
       #if ENABLED(FILAMENT_SWITCH_AND_MOTION)
 
-        #define FILAMENT_MOTION_DISTANCE_MM 3.0 // (mm) Missing distance required to trigger runout
+        #define FILAMENT_MOTION_DISTANCE_MM 7.0 // (mm) Missing distance required to trigger runout
 
         #define NUM_MOTION_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_MOTION#_PIN for each.
-        //#define FIL_MOTION1_PIN    -1
+        // FIL_MOTION1_PIN is defined in pins_CREALITY_V4.h (PA4)
 
         // Override individually if the motion sensors vary
-        //#define FIL_MOTION1_STATE LOW
-        //#define FIL_MOTION1_PULLUP
+        #define FIL_MOTION1_STATE LOW           // Pin state indicating filament is NOT moving
+        #define FIL_MOTION1_PULLUP              // Use internal pullup for motion sensor
         //#define FIL_MOTION1_PULLDOWN
 
         //#define FIL_MOTION2_STATE LOW
